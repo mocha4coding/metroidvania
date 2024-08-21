@@ -1,17 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp7qo35ba37l5"]
+[gd_scene load_steps=9 format=3 uid="uid://cp7qo35ba37l5"]
 
 [ext_resource type="Texture2D" uid="uid://dmju15pigkm3r" path="res://assets/playground/platform.png" id="1_4bfma"]
 [ext_resource type="PackedScene" uid="uid://cyu8soyjwiina" path="res://scenes/player.tscn" id="2_3jg1f"]
 [ext_resource type="Texture2D" uid="uid://cw56cmjvbsgv4" path="res://assets/playground/vecteezy_this-side-vector-icon-design_16425098.jpg" id="3_r2as4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iatr"]
-size = Vector2(108, 54)
+[ext_resource type="Script" path="res://scripts/DoubleJumpCollectible.gd" id="4_jhyq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6mjc"]
 size = Vector2(181, 52)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iatr"]
+size = Vector2(108, 54)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vn73"]
 size = Vector2(280, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wdfv"]
+size = Vector2(1966.51, 1679.73)
 
 [node name="Playground" type="Node2D"]
 
@@ -48,6 +52,10 @@ polygon = PackedVector2Array(4, 430, 559, 431, 555, 480, -2, 479)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="platforms"]
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="platforms/StaticBody2D"]
+position = Vector2(787.5, 458)
+shape = SubResource("RectangleShape2D_w6mjc")
+
 [node name="Platform7" type="Sprite2D" parent="platforms/StaticBody2D"]
 position = Vector2(751, 458)
 texture = ExtResource("1_4bfma")
@@ -56,22 +64,19 @@ texture = ExtResource("1_4bfma")
 position = Vector2(828, 458)
 texture = ExtResource("1_4bfma")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D"]
-position = Vector2(634, 357)
-shape = SubResource("RectangleShape2D_2iatr")
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="platforms"]
+position = Vector2(-9, 49)
 
 [node name="Platform12" type="Sprite2D" parent="platforms/StaticBody2D2"]
 position = Vector2(635, 355)
 texture = ExtResource("1_4bfma")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="platforms/StaticBody2D2"]
-position = Vector2(787.5, 458)
-shape = SubResource("RectangleShape2D_w6mjc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D2"]
+position = Vector2(634, 357)
+shape = SubResource("RectangleShape2D_2iatr")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="platforms"]
-position = Vector2(501, 0)
+position = Vector2(178, 3)
 
 [node name="Platform9" type="Sprite2D" parent="platforms/StaticBody2D3"]
 position = Vector2(1032, 458)
@@ -93,9 +98,17 @@ shape = SubResource("RectangleShape2D_8vn73")
 position = Vector2(285, 151)
 scale = Vector2(0.315, 0.315)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
-[node name="VecteezyThis-side-vector-icon-design16425098" type="Sprite2D" parent="."]
-position = Vector2(788, 359)
-scale = Vector2(0.0852032, 0.0852032)
+[node name="DoubleJumpCollectible" type="Sprite2D" parent="."]
+position = Vector2(790, 408)
+scale = Vector2(0.0244087, 0.0244087)
 texture = ExtResource("3_r2as4")
+script = ExtResource("4_jhyq6")
+
+[node name="Area2D" type="Area2D" parent="DoubleJumpCollectible"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoubleJumpCollectible/Area2D"]
+position = Vector2(0, -20.4844)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_5wdfv")
+
+[connection signal="body_entered" from="DoubleJumpCollectible/Area2D" to="DoubleJumpCollectible" method="_on_area_2d_body_entered"]
