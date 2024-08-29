@@ -7,6 +7,6 @@ script = ExtResource("1_vd6k5")
 name = "DefaultBall"
 jumpVelocity = -400.0
 weight = 30.0
-horizontalSpeed = 100.0
+horizontalSpeed = 300.0
 resilience = 10.0
 maxJumps = 2

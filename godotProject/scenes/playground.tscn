@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cp7qo35ba37l5"]
+[gd_scene load_steps=12 format=3 uid="uid://cp7qo35ba37l5"]
 
 [ext_resource type="Texture2D" uid="uid://dmju15pigkm3r" path="res://assets/playground/platform.png" id="1_4bfma"]
 [ext_resource type="PackedScene" uid="uid://cyu8soyjwiina" path="res://scenes/player.tscn" id="2_3jg1f"]
-[ext_resource type="Texture2D" uid="uid://cw56cmjvbsgv4" path="res://assets/playground/vecteezy_this-side-vector-icon-design_16425098.jpg" id="3_r2as4"]
-[ext_resource type="Script" path="res://scripts/DoubleJumpCollectible.gd" id="4_jhyq6"]
+[ext_resource type="PackedScene" uid="uid://dtow8q0yyr0wv" path="res://scenes/double_jump_collectible.tscn" id="3_w8eid"]
+[ext_resource type="PackedScene" uid="uid://bpxxo643enc40" path="res://scenes/stone_ball_mode_collectible.tscn" id="4_xcfe2"]
+[ext_resource type="PackedScene" uid="uid://20p3fda12g0b" path="res://scenes/checkpoint.tscn" id="5_el8rg"]
+[ext_resource type="PackedScene" uid="uid://h3jn88mnf5vp" path="res://scenes/death_zone.tscn" id="6_ehs3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6mjc"]
 size = Vector2(181, 52)
@@ -14,8 +16,10 @@ size = Vector2(108, 54)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vn73"]
 size = Vector2(280, 52)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wdfv"]
-size = Vector2(1966.51, 1679.73)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epix4"]
+size = Vector2(398, 55)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0enmu"]
 
 [node name="Playground" type="Node2D"]
 
@@ -94,21 +98,48 @@ texture = ExtResource("1_4bfma")
 position = Vector2(1119, 458)
 shape = SubResource("RectangleShape2D_8vn73")
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="platforms"]
+
+[node name="Platform" type="Sprite2D" parent="platforms/StaticBody2D4"]
+position = Vector2(1808, 530)
+texture = ExtResource("1_4bfma")
+
+[node name="Platform2" type="Sprite2D" parent="platforms/StaticBody2D4"]
+position = Vector2(1906, 530)
+texture = ExtResource("1_4bfma")
+
+[node name="Platform3" type="Sprite2D" parent="platforms/StaticBody2D4"]
+position = Vector2(1992, 530)
+texture = ExtResource("1_4bfma")
+
+[node name="Platform4" type="Sprite2D" parent="platforms/StaticBody2D4"]
+position = Vector2(2106, 530)
+texture = ExtResource("1_4bfma")
+
+[node name="Platform5" type="Sprite2D" parent="platforms/StaticBody2D4"]
+position = Vector2(2106, 530)
+texture = ExtResource("1_4bfma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/StaticBody2D4"]
+position = Vector2(1957, 530.5)
+shape = SubResource("RectangleShape2D_epix4")
+
 [node name="Player" parent="." instance=ExtResource("2_3jg1f")]
 position = Vector2(285, 151)
 scale = Vector2(0.315, 0.315)
 
-[node name="DoubleJumpCollectible" type="Sprite2D" parent="."]
-position = Vector2(790, 408)
-scale = Vector2(0.0244087, 0.0244087)
-texture = ExtResource("3_r2as4")
-script = ExtResource("4_jhyq6")
+[node name="DoubleJumpCollectible" parent="." instance=ExtResource("3_w8eid")]
 
-[node name="Area2D" type="Area2D" parent="DoubleJumpCollectible"]
+[node name="StoneBallModeCollectible" parent="." instance=ExtResource("4_xcfe2")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DoubleJumpCollectible/Area2D"]
-position = Vector2(0, -20.4844)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_5wdfv")
+[node name="Checkpoint" parent="." instance=ExtResource("5_el8rg")]
+position = Vector2(459, 348)
 
-[connection signal="body_entered" from="DoubleJumpCollectible/Area2D" to="DoubleJumpCollectible" method="_on_area_2d_body_entered"]
+[node name="DeathZone" parent="." instance=ExtResource("6_ehs3b")]
+position = Vector2(962, 557)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+shape = SubResource("WorldBoundaryShape2D_0enmu")
+
+[node name="Checkpoint2" parent="." instance=ExtResource("5_el8rg")]
+position = Vector2(1279, 359)

@@ -16,3 +16,5 @@ texture = ExtResource("3_f4svv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m1d37")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ball" load_steps=2 format=3 uid="uid://cu8xwipmdoqhs"]
+
+[ext_resource type="Script" path="res://resources/ball.gd" id="1_nhprj"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_nhprj")
+name = "stone_ball"
+jumpVelocity = -200.0
+weight = 0.0
+horizontalSpeed = 100.0
+resilience = 0.0
+maxJumps = 3
