@@ -4,17 +4,19 @@
 [ext_resource type="Resource" uid="uid://d4edf6kyqutle" path="res://resources/balls_resources/default_ball.tres" id="2_5w0nr"]
 [ext_resource type="Texture2D" uid="uid://bcxdpw36lyj6t" path="res://assets/playground/ball.png" id="3_f4svv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m1d37"]
-radius = 167.61
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtl8w"]
+radius = 108.0
+height = 224.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lnbq5")
 ball_mode = ExtResource("2_5w0nr")
 
 [node name="Ball" type="Sprite2D" parent="."]
+scale = Vector2(0.13, 0.13)
 texture = ExtResource("3_f4svv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_m1d37")
+shape = SubResource("CapsuleShape2D_mtl8w")
 
 [node name="Camera2D" type="Camera2D" parent="."]

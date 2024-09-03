@@ -1,0 +1,144 @@
+[gd_scene load_steps=15 format=3 uid="uid://cmia1y8ktx5qh"]
+
+[ext_resource type="Script" path="res://scripts/interactables/tree_elevator.gd" id="1_0ql5w"]
+[ext_resource type="Texture2D" uid="uid://bspjmpbqbba5p" path="res://assets/interactables/elevatorTree/Tree_Asset_Metroidvania_02 2.png" id="1_7m30i"]
+[ext_resource type="Texture2D" uid="uid://celwwchp6k65f" path="res://assets/interactables/elevatorTree/Group 1.png" id="2_b3vh4"]
+[ext_resource type="Texture2D" uid="uid://hmgijh0q5uip" path="res://assets/interactables/elevatorTree/Subtract.png" id="3_i8ia0"]
+[ext_resource type="Texture2D" uid="uid://mlv33e7pj0r5" path="res://assets/interactables/elevatorTree/Tree_Asset_Metroidvania_03 1.png" id="4_r8wob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0lqc"]
+size = Vector2(41, 681)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx03i"]
+size = Vector2(41, 642.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l6pj"]
+size = Vector2(209, 51)
+
+[sub_resource type="Animation" id="Animation_yruw1"]
+resource_name = "up"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shiftballPlatform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -632)]
+}
+
+[sub_resource type="Animation" id="Animation_2xl8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shiftballPlatform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -632)]
+}
+
+[sub_resource type="Animation" id="Animation_hu7f3"]
+resource_name = "down"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shiftballPlatform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -630), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_571aj"]
+_data = {
+"RESET": SubResource("Animation_2xl8k"),
+"down": SubResource("Animation_hu7f3"),
+"up": SubResource("Animation_yruw1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1nws"]
+size = Vector2(131, 181)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r035j"]
+size = Vector2(143, 420)
+
+[node name="treeElevator" type="Node2D"]
+script = ExtResource("1_0ql5w")
+
+[node name="trunk" type="Sprite2D" parent="."]
+z_index = 5
+texture = ExtResource("1_7m30i")
+
+[node name="entrance" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(-511, 967)
+texture = ExtResource("2_b3vh4")
+
+[node name="exitBelow" type="Sprite2D" parent="."]
+z_index = 100
+position = Vector2(1, 855)
+texture = ExtResource("3_i8ia0")
+
+[node name="exitBackground" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(22, 252)
+texture = ExtResource("4_r8wob")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(114.5, 756.5)
+shape = SubResource("RectangleShape2D_k0lqc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-178, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-152, 408.75)
+shape = SubResource("RectangleShape2D_kx03i")
+
+[node name="shiftballPlatform" type="StaticBody2D" parent="."]
+position = Vector2(0, -632)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shiftballPlatform"]
+position = Vector2(-11.5, 1072.5)
+shape = SubResource("RectangleShape2D_5l6pj")
+debug_color = Color(0.393282, 0.605686, 0.220823, 0.42)
+
+[node name="shiftPlatform" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_571aj")
+}
+
+[node name="BallEnteredDetector" type="Area2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallEnteredDetector"]
+position = Vector2(26.5, 951.5)
+shape = SubResource("RectangleShape2D_g1nws")
+debug_color = Color(0.869182, 0.263284, 0.594257, 0.42)
+
+[node name="BallExitDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallExitDetector"]
+position = Vector2(61.5, 200)
+shape = SubResource("RectangleShape2D_r035j")
+debug_color = Color(0.814644, 0.34438, 0.571405, 0.42)
+
+[connection signal="body_entered" from="BallEnteredDetector" to="." method="_on_ball_entered_detector_body_entered"]
+[connection signal="body_entered" from="BallEnteredDetector" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="BallExitDetector" to="." method="_on_ball_exit_detector_body_exited"]
