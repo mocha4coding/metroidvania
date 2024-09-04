@@ -2,6 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://cjhr018xqkcyc" path="res://assets/interactables/Swing_Asset_Metroidvania 1.png" id="1_0rqhl"]
 
+[sub_resource type="Animation" id="Animation_kvwcl"]
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("swing:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.261799, 0.0, -0.261799]
+}
+
 [sub_resource type="Animation" id="Animation_yeyqy"]
 resource_name = "swing"
 length = 2.0
@@ -19,21 +35,6 @@ tracks/0/keys = {
 "values": [0.261799, 0.0, -0.261799]
 }
 
-[sub_resource type="Animation" id="Animation_kvwcl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("swing:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.261799]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vtlhn"]
 _data = {
 "RESET": SubResource("Animation_kvwcl"),
@@ -41,6 +42,7 @@ _data = {
 }
 
 [node name="Swing" type="Node2D"]
+z_index = -100
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -52,7 +54,7 @@ autoplay = "swing"
 rotation = 0.261799
 
 [node name="StaticBody2D" type="StaticBody2D" parent="swing"]
-position = Vector2(70, 876)
+position = Vector2(349.162, 885.813)
 
 [node name="Sprite2D" type="Sprite2D" parent="swing/StaticBody2D"]
 position = Vector2(-6, 1)
@@ -60,4 +62,4 @@ texture = ExtResource("1_0rqhl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="swing/StaticBody2D"]
 position = Vector2(-6, 1)
-polygon = PackedVector2Array(-309.716, 493.287, -84.1378, 434.914, 99.2322, 578.342, -149.907, 649.24)
+polygon = PackedVector2Array(-281.328, 520.285, 46.8728, 523.811, 48.6039, 592.971, -255.292, 583.587)

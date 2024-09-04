@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cp7qo35ba37l5"]
+[gd_scene load_steps=14 format=3 uid="uid://cp7qo35ba37l5"]
 
 [ext_resource type="Texture2D" uid="uid://dmju15pigkm3r" path="res://assets/playground/platform.png" id="1_4bfma"]
 [ext_resource type="PackedScene" uid="uid://cmia1y8ktx5qh" path="res://scenes/interactables/treeElevator.tscn" id="2_1gybw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bpxxo643enc40" path="res://scenes/stone_ball_mode_collectible.tscn" id="4_xcfe2"]
 [ext_resource type="PackedScene" uid="uid://20p3fda12g0b" path="res://scenes/checkpoint.tscn" id="5_el8rg"]
 [ext_resource type="PackedScene" uid="uid://h3jn88mnf5vp" path="res://scenes/death_zone.tscn" id="6_ehs3b"]
+[ext_resource type="PackedScene" uid="uid://cyg16un8k2g7o" path="res://scenes/interactables/swing.tscn" id="8_rf7gm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6mjc"]
 size = Vector2(181, 52)
@@ -256,7 +257,7 @@ position = Vector2(1957, 530.5)
 shape = SubResource("RectangleShape2D_epix4")
 
 [node name="Player" parent="." instance=ExtResource("2_3jg1f")]
-position = Vector2(285, 151)
+position = Vector2(3931, 98)
 scale = Vector2(0.37, 0.37)
 
 [node name="DoubleJumpCollectible" parent="." instance=ExtResource("3_w8eid")]
@@ -278,3 +279,11 @@ position = Vector2(1279, 359)
 [node name="treeElevator" parent="." instance=ExtResource("2_1gybw")]
 position = Vector2(2731, -177)
 scale = Vector2(0.615, 0.615)
+
+[node name="Swing" parent="." instance=ExtResource("8_rf7gm")]
+position = Vector2(4088, -400)
+scale = Vector2(0.4, 0.4)
+
+[node name="Swing2" parent="." instance=ExtResource("8_rf7gm")]
+position = Vector2(4668, -551)
+scale = Vector2(0.4, 0.4)
