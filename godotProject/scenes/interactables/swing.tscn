@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyg16un8k2g7o"]
+[gd_scene load_steps=7 format=3 uid="uid://cyg16un8k2g7o"]
 
 [ext_resource type="Texture2D" uid="uid://cjhr018xqkcyc" path="res://assets/interactables/Swing_Asset_Metroidvania 1.png" id="1_0rqhl"]
+[ext_resource type="Script" path="res://scripts/interactables/swing.gd" id="1_rl3im"]
 
 [sub_resource type="Animation" id="Animation_kvwcl"]
 length = 3.0
@@ -41,8 +42,12 @@ _data = {
 "swing": SubResource("Animation_yeyqy")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0h4nc"]
+radius = 343.692
+
 [node name="Swing" type="Node2D"]
 z_index = -100
+script = ExtResource("1_rl3im")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -63,3 +68,24 @@ texture = ExtResource("1_0rqhl")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="swing/StaticBody2D"]
 position = Vector2(-6, 1)
 polygon = PackedVector2Array(-281.328, 520.285, 46.8728, 523.811, 48.6039, 592.971, -255.292, 583.587)
+
+[node name="BallPosition" type="Marker2D" parent="swing"]
+position = Vector2(205.357, 1291.87)
+rotation = -0.261799
+
+[node name="BallDetector" type="Area2D" parent="swing/BallPosition"]
+position = Vector2(136, -1301)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="swing/BallPosition/BallDetector"]
+position = Vector2(-146.811, 1335.55)
+shape = SubResource("CircleShape2D_0h4nc")
+
+[node name="BallSeat" type="Area2D" parent="swing"]
+position = Vector2(6.02838, -27.3433)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="swing/BallSeat"]
+position = Vector2(343.162, 886.813)
+polygon = PackedVector2Array(-281.328, 520.285, 46.8728, 523.811, 48.6039, 592.971, -255.292, 583.587)
+
+[connection signal="body_entered" from="swing/BallPosition/BallDetector" to="." method="_on_ball_detector_body_entered"]
+[connection signal="body_entered" from="swing/BallSeat" to="." method="_on_ball_seat_body_entered"]

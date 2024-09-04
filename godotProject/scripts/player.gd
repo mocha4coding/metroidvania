@@ -12,7 +12,7 @@ var is_double_jump_collected : bool = false
 var ball_mode_index : int = 0
 var total_ball_collected : int = 1
 var last_checkpoint_position : Vector2 
-
+var moveEnabled: bool = true
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton:
 		print(event)
@@ -26,7 +26,7 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") :
-		print("Jumping")
+		#print("Jumping")
 		if is_on_floor() && jump_count > 0 :
 			jump_count = 0
 		
@@ -42,10 +42,11 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * ball_mode.horizontalSpeed
-	else:
-		velocity.x = move_toward(velocity.x, 0, ball_mode.horizontalSpeed)
+	if moveEnabled:
+		if direction:
+			velocity.x = direction * ball_mode.horizontalSpeed
+		else:
+			velocity.x = move_toward(velocity.x, 0, ball_mode.horizontalSpeed)
 
 
 	#handle ball switch 
@@ -85,3 +86,9 @@ func saveLastPlayerCheckpoint(lastPosition : Vector2):
 	
 func killPlayer():
 	global_position = last_checkpoint_position
+	
+
+func makePlayerFloatToLocation(targetPosition : Vector2):
+	if global_position != targetPosition:
+		var floatDirection = global_position.direction_to(targetPosition)
+		velocity = floatDirection * ball_mode.horizontalSpeed

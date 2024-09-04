@@ -257,7 +257,7 @@ position = Vector2(1957, 530.5)
 shape = SubResource("RectangleShape2D_epix4")
 
 [node name="Player" parent="." instance=ExtResource("2_3jg1f")]
-position = Vector2(3931, 98)
+position = Vector2(375, 155)
 scale = Vector2(0.37, 0.37)
 
 [node name="DoubleJumpCollectible" parent="." instance=ExtResource("3_w8eid")]
