@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyu8soyjwiina"]
+[gd_scene load_steps=8 format=3 uid="uid://cyu8soyjwiina"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_lnbq5"]
 [ext_resource type="Resource" uid="uid://d4edf6kyqutle" path="res://resources/balls_resources/default_ball.tres" id="2_5w0nr"]
@@ -7,6 +7,44 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtl8w"]
 radius = 108.0
 height = 224.0
+
+[sub_resource type="Animation" id="Animation_n2cdv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ball:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r271e"]
+resource_name = "rotation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ball:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqp8p"]
+_data = {
+"RESET": SubResource("Animation_n2cdv"),
+"rotation": SubResource("Animation_r271e")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_lnbq5")
@@ -20,3 +58,9 @@ texture = ExtResource("3_f4svv")
 shape = SubResource("CapsuleShape2D_mtl8w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nqp8p")
+}
+autoplay = "rotation"
